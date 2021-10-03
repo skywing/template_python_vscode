@@ -1,6 +1,16 @@
 # A Visual Studio Code Python Development Baseline Template
  
 This a baseline starter template for a typical Python development following the modern build and packaging conventions. It utilizes popular libraries for unit test, code coverage, common security scan, code documentation, and configuration file management.
+
+## Creating and Using Virtual Environments
+```python
+python -m venv .venv
+```
+
+### Activating virtual environment
+```zsh
+source ./.venv/bin/activate
+```
  
 ## Folder structure
 - .vscode - Visual Studio Code workspace settings
@@ -44,7 +54,6 @@ The following will setup Visual Studio Code to use Pylance for linting Python co
  
 ```json
 {
-    "python.pythonPath": "/usr/local/bin/python3",
     "python.languageServer": "Pylance",
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoSearchPaths": true,
