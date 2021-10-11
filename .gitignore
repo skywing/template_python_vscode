@@ -4,6 +4,7 @@
 # Tests runtime folder
 tests/runtime
 tests/runtime/**
+runtime/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

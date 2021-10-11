@@ -13,7 +13,7 @@ stream = 'ext://sys.stdout'
 
 [handlers.file-rotating]
 class = 'logging.handlers.TimedRotatingFileHandler'
-filename = './tests/runtime/logs/app.log'
+filename = './runtime/logs/app.log'
 level = 'DEBUG'
 formatter = 'simple'
 when = 'D'
