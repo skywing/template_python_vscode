@@ -48,6 +48,45 @@ coverage report -m
 ```console
 coverage html
 ```
+
+### Pylance + Pylint
+Pylance is an extension that works alongside Python in Visual Studio Code to provide performant language support. Under the hood, Pylance is powered by Pyright, Microsoft's static type checking tool. Using Pyright, Pylance has the ability to supercharge your Python IntelliSense experience with rich type information, helping you write better code faster.
+
+Pylint is a source-code, bug and quality checker for the Python programming language. It is named following a common convention in Python of a "py" prefix, and a nod to the C programming lint program. It follows the style recommended by PEP 8, the Python style guide.
+
+
+### Logging
+Example of configuring logging by using TOML configuration file. Setup and organize loggers in a hierachy with different type of handlers and formatters.
+
+```toml
+version = 1
+disable_exsiting_loggers = false
+
+[formatters.simple]
+format = '[%(asctime)s.%(msecs)03d [%(threadName)s] %(module)s %(levelname)s] - %(message)s]'
+datefmt = '%H:%M:%S'
+
+[handlers.console]
+class = 'logging.StreamHandler'
+level = 'INFO'
+formatter = 'simple'
+stream = 'ext://sys.stdout'
+
+[handlers.file-rotating]
+class = 'logging.handlers.TimedRotatingFileHandler'
+filename = './tests/runtime/logs/app.log'
+level = 'DEBUG'
+formatter = 'simple'
+when = 'D'
+
+[loggers.util]
+level = 'DEBUG'
+propagate = true
+
+[root]
+level = 'DEBUG'
+handlers = ['console', 'file-rotating']
+```
  
 ### VS code Python settings
 The following will setup Visual Studio Code to use Pylance for linting Python code with basic type checking. It enable the Pytest for running unit tests, set "./tests" as where the unit tests are ,and exclude some runtime folders from Python, git, OS, and etc. The settings also let the terminal to know where to search Python code/modules when running Python code in the integrated terminal. 
@@ -55,14 +94,10 @@ The following will setup Visual Studio Code to use Pylance for linting Python co
 ```json
 {
     "python.languageServer": "Pylance",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
     "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoSearchPaths": true,
-    "python.testing.pytestEnabled": true,
-    "python.testing.unittestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
+    "python.analysis.autoSearchPaths": true ,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -70,11 +105,16 @@ The following will setup Visual Studio Code to use Pylance for linting Python co
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/__pycache__": true,
-        "**/.pytest_cache": true       
+        "**/.pytest_cache": true
     },
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
     "terminal.integrated.env.osx": {
-        "PYTHONPATH": "${workspaceFolder}/src",
-    }
+        "PYTHONPATH": "${workspaceFolder}/src"
+    },
 }
 ```
  
