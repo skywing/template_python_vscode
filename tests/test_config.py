@@ -8,8 +8,8 @@ def test_config_file_not_found():
 
 def test_empty_config_with_no_config_file():
     with pytest.raises(FileNotFoundError):
-        config = Configuration('./this_config_not_exists.toml')
-        assert config is not None
+        config = Configuration()
+        config.load('./this_config_not_exists.toml')
 
 def test_config_with_wrong_key():
     with pytest.raises(KeyError):
