@@ -14,7 +14,7 @@ class Configuration():
         logger.debug(f'loading config file: {config_file_path}')
         path = Path(config_file_path)
         if not path.exists():
-            raise ValueError('File not found at {config_file_path}')
+            raise FileNotFoundError('File not found at {config_file_path}')
         self.__config_file_path = config_file_path
         self.__config = toml.load(self.__config_file_path)
 
