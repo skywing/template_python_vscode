@@ -1,5 +1,6 @@
 # OSX 
 .DS_Store
+.dccache
 
 # Tests runtime folder
 tests/runtime
